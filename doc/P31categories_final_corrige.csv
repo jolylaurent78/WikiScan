@@ -1,0 +1,116 @@
+p31,label,nb_total,nb_crossReference,statut,categorie
+Q484170,commune française,311,36,garde,Commune
+Q16970,église,136,10,garde,Édifice religieux
+Q178561,bataille,51,45,garde,Bataille / Conflit
+Q23413,château fort,32,1,garde,Château / Fortification
+Q751876,château,25,2,garde,Château / Fortification
+Q188055,siège militaire,19,18,garde,Bataille / Conflit
+Q79007,rue,18,2,exclu,Infrastructure moderne
+Q56242215,cathédrale catholique,14,2,garde,Édifice religieux
+Q174782,place,12,1,exclu,Infrastructure moderne
+Q108325,chapelle,10,2,garde,Édifice religieux
+Q160742,abbaye,8,1,exclu,Lieu religieux secondaire
+Q860861,sculpture,7,0,garde,Monument / Sculpture
+Q207694,musée d'art,6,0,exclu,Loisir / Tourisme
+Q120560,basilique mineure,5,0,exclu,Édifice religieux
+Q33506,musée,5,3,exclu,Loisir / Tourisme
+Q6465,département français,5,3,exclu,Territoire / Entité administrative
+Q123705,quartier,4,0,exclu,Territoire / Entité administrative
+Q1365179,hôtel particulier,4,0,exclu,Habitation / Bâtiment civil
+Q179700,statue,4,1,garde,Monument / Sculpture
+Q3947,maison,4,1,garde,Habitation / Bâtiment civil
+Q39614,cimetière,4,0,exclu,Lieu de mémoire
+Q1261499,bataille navale,3,3,garde,Bataille / Conflit
+Q20860083,établissement scolaire,3,1,exclu,Établissement éducatif
+Q2511322,lycée,3,0,exclu,Établissement éducatif
+Q2750108,prieuré,3,1,garde,Édifice religieux
+Q3397526,pont en maçonnerie,3,0,exclu,Infrastructure moderne
+Q83620,voie de communication,3,0,exclu,Infrastructure moderne
+Q12139612,liste,2,0,exclu,Traités / Documents historiques
+Q13226383,équipement,2,0,exclu,Infrastructure ou site technique
+Q209495,province de France,2,1,exclu,Territoire / Entité administrative
+Q22698,parc,2,0,exclu,Loisir / Tourisme
+Q252916,quartier administratif de Paris,2,0,exclu,Territoire / Entité administrative
+Q3914,école,2,0,exclu,Établissement éducatif
+Q4421,forêt,2,0,garde,Nature / Géographie
+Q572995,région naturelle de France,2,1,exclu,Nature / Géographie
+Q7543083,avenue,2,0,exclu,Infrastructure moderne
+Q815448,beffroi,2,0,garde,Château / Fortification
+Q879050,manoir,2,0,garde,Château / Fortification
+Q1088552,église catholique,1,0,garde,Édifice religieux
+Q1107656,jardin,1,0,exclu,Loisir / Tourisme
+Q1139665,assassinat politique,1,0,exclu,Données encyclopédiques
+Q11755959,immeuble,1,0,exclu,Habitation / Bâtiment civil
+Q1190554,occurrence,1,0,exclu,Données encyclopédiques
+Q12104174,musée ethnographique,1,0,exclu,Loisir / Tourisme
+Q12518,tour,1,0,garde,Château / Fortification
+Q12731,impasse,1,0,exclu,Infrastructure moderne
+Q130192067,cérémonie d'ouverture des Jeux olympiques,1,0,exclu,Données encyclopédiques
+Q131569,traité,1,1,garde,Traités / Documents historiques
+Q131734,brasserie,1,0,exclu,Habitation / Bâtiment civil
+Q133056,col routier,1,0,exclu,Infrastructure moderne
+Q13406463,page de liste de Wikimédia,1,0,exclu,Traités / Documents historiques
+Q1371288,État vassal,1,1,exclu,Territoire / Entité administrative
+Q1408475,maison forte,1,0,exclu,Habitation / Bâtiment civil
+Q1444,orgue,1,0,exclu,Objet / Élément symbolique
+Q1509716,collégiale,1,0,exclu,Lieu religieux secondaire
+Q1523545,logis seigneurial,1,0,exclu,Habitation / Bâtiment civil
+Q15548045,aumônerie,1,0,exclu,Lieu religieux secondaire
+Q15640053,réseau de tramway,1,0,exclu,Infrastructure moderne
+Q15661340,ville antique,1,0,exclu,Territoire / Entité administrative
+Q15823129,chartreuse,1,0,exclu,Édifice religieux
+Q1620908,région historique,1,0,exclu,Territoire / Entité administrative
+Q162602,île fluviale,1,0,exclu,Nature / Géographie
+Q162875,mausolée,1,1,exclu,Lieu de mémoire
+Q163740,organisation à but non lucratif,1,0,exclu,Données encyclopédiques
+Q16560,palais,1,0,garde,Habitation / Bâtiment civil
+Q167346,jardin botanique,1,0,exclu,Loisir / Tourisme
+Q17524420,aspect de l'histoire,1,0,exclu,Données encyclopédiques
+Q18340550,chronologie de Wikimédia,1,0,exclu,Traités / Documents historiques
+Q186117,frise chronologique,1,0,exclu,Données encyclopédiques
+Q18615527,pont tramway,1,1,exclu,Infrastructure moderne
+Q188040,carrière,1,0,exclu,Nature / Géographie
+Q1970725,région naturelle,1,1,exclu,Nature / Géographie
+Q19951362,nécropole nationale en France,1,0,exclu,Lieu de mémoire
+Q2026833,square,1,0,exclu,Loisir / Tourisme
+Q21869758,commune déléguée,1,0,exclu,Commune
+Q2196917,chapelle d'église,1,0,exclu,Édifice religieux
+Q22746,jardin public,1,0,exclu,Loisir / Tourisme
+Q2416723,parc à thèmes,1,1,exclu,Loisir / Tourisme
+Q24354,théâtre,1,0,exclu,Loisir / Tourisme
+Q255595,ossuaire,1,0,exclu,Lieu de mémoire
+Q2772772,musée militaire,1,0,exclu,Loisir / Tourisme
+Q2860456,archives départementales,1,0,exclu,Territoire / Entité administrative
+Q2977,cathédrale,1,0,garde,Édifice religieux
+Q2997893,Correrie,1,0,exclu,Lieu religieux secondaire
+Q3024240,État historique,1,1,exclu,Territoire / Entité administrative
+Q3068953,ferme fortifiée,1,1,exclu,Château / Fortification
+Q317557,église paroissiale,1,0,exclu,Édifice religieux
+Q3305213,peinture,1,0,exclu,Objet / Élément symbolique
+Q3502482,région culturelle,1,1,exclu,Territoire / Entité administrative
+Q3551775,université en France,1,0,exclu,Établissement éducatif
+Q3624078,État souverain,1,1,exclu,Territoire / Entité administrative
+Q36784,région française,1,0,exclu,Territoire / Entité administrative
+Q38720,moulin à vent,1,0,exclu,Habitation / Bâtiment civil
+Q39594,baie,1,1,exclu,Nature / Géographie
+Q39715,phare,1,0,exclu,Infrastructure ou site technique
+Q4022,rivière,1,0,exclu,Nature / Géographie
+Q41253,salle de cinéma,1,0,exclu,Loisir / Tourisme
+Q44782,port,1,0,exclu,Infrastructure ou site technique
+Q483110,stade,1,0,exclu,Loisir / Tourisme
+Q483453,fontaine,1,0,exclu,Monument / Sculpture
+Q4989906,monument,1,0,garde,Monument / Sculpture
+Q5383482,palais épiscopal,1,0,garde,Habitation / Bâtiment civil
+Q55177716,jardin public,1,0,exclu,Loisir / Tourisme
+Q55488,gare ferroviaire,1,0,exclu,Infrastructure moderne
+Q575759,monument aux morts,1,0,exclu,Monument / Sculpture
+Q625298,traité de paix,1,1,garde,Traités / Documents historiques
+Q667018,musée de cire,1,0,exclu,Loisir / Tourisme
+Q68800046,catastrophe industrielle,1,0,exclu,Infrastructure ou site technique
+Q811534,arbre remarquable,1,0,exclu,Nature / Géographie
+Q8124,pénis humain,1,1,exclu,Objet / Élément symbolique
+Q82117,porte de ville,1,0,exclu,Infrastructure ou site technique
+Q840482,sanctuaire marial,1,0,exclu,Édifice religieux
+Q8502,montagne,1,0,exclu,Nature / Géographie
+Q91165,donjon,1,1,garde,Château / Fortification
+Q928830,station de métro,1,0,exclu,Infrastructure moderne
