@@ -32,7 +32,7 @@ REPERTOIRES_PAR_ETAPE = {
 
 def listener(run_id: str, step: int, pause: float):
     dossier_source = REPERTOIRES_PAR_ETAPE[step - 1]
-    print(f"[👂 Listener actif] Étape {step} – Surveillance du répertoire : {dossier_source}")
+    print(f"[Etape {step} 👂 Listener actif] Étape {step} – Surveillance du répertoire : {dossier_source}")
 
     nom_stop = f"{run_id}_STOP"
 
@@ -45,7 +45,7 @@ def listener(run_id: str, step: int, pause: float):
 
         for fichier in fichiers_json:
             chemin_complet = os.path.join(dossier_source, fichier)
-            print(f"[📥 Nouveau fichier détecté] {chemin_complet}")
+            print(f"[Etape {step} 📥 ] Nouveau fichier détecté] {chemin_complet}")
 
             if step == 2:
                 traiterQidDepuisWikipedia(runId=run_id, fichierInput=chemin_complet, pause=pause)
@@ -63,13 +63,13 @@ def listener(run_id: str, step: int, pause: float):
             if os.path.exists(destination):
                 os.remove(destination)
             os.rename(chemin_complet, destination)
-            print(f"[📦 Archivé] {chemin_complet} → {destination}")
+            print(f"[Etape {step} 📦 Archivé] {chemin_complet} → {destination}")
 
 
         # 🛑 Gestion standard des autres étapes
         if nom_stop in fichiers_tous:
 
-            print(f"[✅] Tous les fichiers traités. Fichier STOP détecté : {nom_stop}")
+            print(f"[Etape {step} ✅] Tous les fichiers traités. Fichier STOP détecté : {nom_stop}")
 
             # 📦 Déplacement vers l’étape suivante si applicable
             if step < len(REPERTOIRES_PAR_ETAPE):
@@ -82,7 +82,7 @@ def listener(run_id: str, step: int, pause: float):
                     os.remove(dest_stop)
                 os.rename(source_stop, dest_stop)
 
-                print(f"[➡️] Fichier STOP déplacé vers {dossier_suivant}")
+                print(f"[Etape {step} ➡️] Fichier STOP déplacé vers {dossier_suivant}")
 
             break  # ✅ Fin du listener
 
@@ -93,6 +93,14 @@ def listener(run_id: str, step: int, pause: float):
 # ───────────────────────────────────────
 # Fonctions de traitement (par étape ou par logique)
 # ───────────────────────────────────────
+def lister_titres(runId: str):
+    print(f"[Étape 0] Lister titres Run: {runId}")
+    processor = BatchProcessingTitresExtraction(
+        runId=runId,
+        dossierSortie="dummy"
+    )
+    processor.afficherTitres()
+
 def traiter_extraction_titres(runId: str, pause: float = 0.1, max_lignes: Optional[int] = None):
     print(f"[Étape 1] Extraction par backlink – Run: {runId} | max={max_lignes}")
     processor = BatchProcessingTitresExtraction(
@@ -122,11 +130,10 @@ def traiterCoordonnees(runId: str, fichierInput: str, pause: float = 0.1):
         pause=pause
     )
     processor.executer()
-    print(f"[✅] Traitement terminé pour : {fichierInput}")
+    print(f"[Étape 3 ✅] Traitement terminé pour : {fichierInput}")
 
 
 def traiterResumeDescription(runId: str, fichierInput: str, pause: float = 0.1):
-    print(f"[Étape 4] Enrichissement résumé/description – Run: {runId} | Input: {fichierInput}")
     processor = BatchProcessingResumeDescription(
         runId=runId,
         fichierInput=fichierInput,
@@ -134,7 +141,7 @@ def traiterResumeDescription(runId: str, fichierInput: str, pause: float = 0.1):
         pause=pause
     )
     processor.executer()
-    print(f"[✅] Traitement terminé pour : {fichierInput}")
+    print(f"[Etape 4 ✅] Traitement terminé pour : {fichierInput}")
 
 
 def insertionBase(runId: str, fichierInput: str):
@@ -152,14 +159,17 @@ def insertionBase(runId: str, fichierInput: str):
 def main(runId:str, step:int, pause:int = 0.1, maxLignes:int = None):
 
     # 🔁 Scan automatique du répertoire (listener actif)
-    if step == 1:
+    if step == 0:
+        lister_titres(runId=runId)
+# 🔁 Scan automatique du répertoire (listener actif)
+    elif step == 1:
         traiter_extraction_titres(
             runId=runId,
             pause=pause,
             max_lignes=maxLignes
         )
 
-    elif step in [2,5]:
+    elif step in [2,3,4,5]:
         listener(run_id=runId, step=step, pause=pause)
 
     else:
@@ -172,7 +182,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Pipeline base historique géolocalisée")
     parser.add_argument("--runId", required=True, help="Identifiant du run")
-    parser.add_argument("--step", type=int, required=True, choices=range(1, 8))
+    parser.add_argument("--step", type=int, required=True, choices=range(0, 6))
     parser.add_argument("--pause", type=float, default=0.1, help="Pause entre requêtes en secondes (anti-timeout)")
     parser.add_argument("--maxLignes", type=int, default=None, help="Nombre maximum de lignes à traiter (debug/test uniquement)")
     args = parser.parse_args()

@@ -14,13 +14,14 @@ class BatchProcessingQidDepuisWikipedia(BatchProcessing):
         self.writer = BatchWriterJSON(
             dossier_sortie = dossierSortie,
             runId = runId,
+            etape=2,
             fichierSortie=fichierInput.replace("Step1", "Step2")
         )
         self.pause = pause
 
     def chargerEntrees(self) -> List[EntreeHistorique]:
         lignes = self.reader.loadLignes()
-        print(f"✅ {len(lignes)} lignes chargées depuis {self.reader.fichierSource}")
+        print(f"[Etape 2 ✅] {len(lignes)} lignes chargées depuis {self.reader.fichierSource}")
         return lignes
 
     def traiterBatch(self, lignes: List[EntreeHistorique]):

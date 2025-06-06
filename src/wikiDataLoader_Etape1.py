@@ -39,6 +39,7 @@ class BatchProcessingTitresExtraction(BatchProcessing):
             dossier_sortie=dossierSortie,
             fichierSortie=f"{runId}_Step1",
             runId=self.runId,
+            etape=1,
             taille_batch=200)
         # On charge depuis un csv la liste des section à analyser
         self.plagesSections = {}  # doit être défini avant
@@ -54,7 +55,7 @@ class BatchProcessingTitresExtraction(BatchProcessing):
     # Fonction de chargement du fichier CSV
     def chargerPlagesSectionsDepuisCSV(self, chemin_csv: str):
         if not os.path.exists(chemin_csv):
-            print(f"[⚠️] Aucun fichier CSV trouvé pour les plages de sections : {chemin_csv}")
+            print(f"[Etape 1] Aucun fichier CSV trouvé pour les plages de sections : {chemin_csv}")
             return
         with open(chemin_csv, newline='', encoding='utf-8') as f:
             reader = csv.DictReader(f)
@@ -150,7 +151,7 @@ class BatchProcessingTitresExtraction(BatchProcessing):
                     articles_detailles.extend(liens)
 
         except Exception as e:
-            print(f"[⚠️] Erreur de parsing du wikitexte : {e}")
+            print(f"[Etape 1 ⚠️] Erreur de parsing du wikitexte : {e}")
 
         return articles_detailles
 
@@ -216,7 +217,7 @@ class BatchProcessingTitresExtraction(BatchProcessing):
                     liens = getLiensDansSection(titre, idx)
                     liens_totaux.update(liens)
             except Exception as e:
-                print(f"[⚠️] Erreur section {section} de {titre} : {e}")
+                print(f"[Etape 1⚠️] Erreur section {section} de {titre} : {e}")
 
         return sorted(liens_totaux)
 
@@ -237,10 +238,10 @@ class BatchProcessingTitresExtraction(BatchProcessing):
 
         if self.bltitle:
             # 🔍 Étape 1 : construire la liste des pages qui référence la page principale
-            print(f"[ℹ] Estimation des backlinks vers : {self.bltitle} ...")
+            print(f"[Etape 1 ℹ] Estimation des backlinks vers : {self.bltitle} ...")
             total = self.compter_backlinks_exhaustif(self.bltitle, pause=self.pause, max_pages=self.max_lignes)
-            print(f"[ℹ] La page « {self.bltitle} » est référencée par {total} page(s) Wikipédia.")
-            print(f"[⏳] Chargement de la totalité des {total} pages...")
+            print(f"[Etape 1 ℹ] La page « {self.bltitle} » est référencée par {total} page(s) Wikipédia.")
+            print(f"[Etape 1 ⏳] Chargement de la totalité des {total} pages...")
 
             lignes_brutes = self.recherche_par_backlink(self.bltitle, limit=self.max_lignes or total)
             entrees = []
@@ -255,7 +256,7 @@ class BatchProcessingTitresExtraction(BatchProcessing):
             titres_crossRef2 = [self.bltitle]
             titres_crossRef1 = articles_detailles
 
-            print(f"[🔗] Pages à explorer en plus pour liens sortants : {articles_detailles}")
+            print(f"[Etape 1 🔗] Pages à explorer en plus pour liens sortants : {articles_detailles}")
 
             # 🔍 Étape 3 : extraire tous les liens sortants de ces pages
             liens_sortants_global1 = []
@@ -271,7 +272,7 @@ class BatchProcessingTitresExtraction(BatchProcessing):
                 liens = self.getLiensSortantsParAPIParse(titre, index_min, index_max)
                 liens_sortants_global2.extend(normaliserTitre(self.extraireTitreDepuisLienWiki(t)) for t in liens)
 
-            print(f"[✅] {len(liens_sortants_global1)+len(liens_sortants_global2)} liens sortants extraits depuis {len(articles_detailles)+1} page(s).")
+            print(f"[Etape 1 ✅] {len(liens_sortants_global1)+len(liens_sortants_global2)} liens sortants extraits depuis {len(articles_detailles)+1} page(s).")
 
             # Intersection
             titres_backlinks = set(normaliserTitre(l["titre"]) for l in lignes_brutes if "titre" in l)
@@ -279,8 +280,8 @@ class BatchProcessingTitresExtraction(BatchProcessing):
             titres_sortants2 = set(liens_sortants_global2)
             titres_croises1 = titres_backlinks & titres_sortants1
             titres_croises2 = titres_backlinks & titres_sortants2
-            print(f"[🔁] {len(titres_croises2)} page(s) cross-référencée(s) de niveau 2 sur {len(lignes_brutes)} backlinks.")
-            print(f"[🔁] {len(titres_croises1)} page(s) cross-référencée(s) de niveau 1 sur {len(lignes_brutes)} backlinks.")
+            print(f"[Etape 1 🔁] {len(titres_croises2)} page(s) cross-référencée(s) de niveau 2 sur {len(lignes_brutes)} backlinks.")
+            print(f"[Etape 1 🔁] {len(titres_croises1)} page(s) cross-référencée(s) de niveau 1 sur {len(lignes_brutes)} backlinks.")
 
             # On crée les EntreeHistorique
             for ligne in lignes_brutes:
@@ -333,7 +334,7 @@ class BatchProcessingTitresExtraction(BatchProcessing):
             data = response.json()
 
             if "parse" not in data or "text" not in data["parse"]:
-                print(f"[⚠️] Page {titre_page} sans contenu HTML.")
+                print(f"[Etape 1 ⚠️] Page {titre_page} sans contenu HTML.")
                 return False
 
             html = data["parse"]["text"]["*"]
@@ -342,7 +343,7 @@ class BatchProcessingTitresExtraction(BatchProcessing):
             # ✅ Utiliser mw-parser-output, et non mw-content-text (inexistant dans l'API)
             content_div = soup.find("div", class_="mw-parser-output")
             if not content_div:
-                print(f"[❌] Pas de contenu principal trouvé pour {titre_page}")
+                print(f"[Etape 1 ❌] Pas de contenu principal trouvé pour {titre_page}")
                 return False
 
             # 🔎 Parcours des liens dans le contenu principal
@@ -360,7 +361,7 @@ class BatchProcessingTitresExtraction(BatchProcessing):
                         return True
 
         except Exception as e:
-            print(f"[❌] Exception dans contientLienDansHTML({titre_page}) : {e}")
+            print(f"[Etape 1 ❌] Exception dans contientLienDansHTML({titre_page}) : {e}")
             return False
 
         return False
@@ -377,10 +378,10 @@ class BatchProcessingTitresExtraction(BatchProcessing):
             lienDansTexte = self.contientLienDansHTML(ligne.titre, self.bltitle)
             if not lienDansTexte:
                 self.pagesIgnoree+=1
-                logger.warning(f"[❌] {ligne.titre} ignorée (pas de lien réel vers {self.bltitle})")
+                logger.warning(f"[Etape 1 ❌] {ligne.titre} ignorée (pas de lien réel vers {self.bltitle})")
 
             if self.pagesTraitée % 10 == 0:
-                print(f"{self.pagesIgnoree} pages ignorées sur {self.pagesTraitée} pages traitées ")
+                print(f"[Etape 1 ⚠️ ] {self.pagesIgnoree} pages ignorées sur {self.pagesTraitée} pages traitées ")
 
             if not lienDansTexte:
                 return None
@@ -435,6 +436,12 @@ class BatchProcessingTitresExtraction(BatchProcessing):
         super().executer()  # Ou traitement principal de l’étape 1
         self.writer.creerFichierStop()
 
+    def afficherTitres(self):
+        for titre in self.plagesSections.keys():
+            print(f"\n[Etape 0 📘] Sections de : {titre}")
+            sections = self.getSectionsUtile(titre)
+            for index, titreSection in sections:
+                print(f"  {index} → {titreSection}")
 
 # test unitaress
 if __name__ == "__main__":

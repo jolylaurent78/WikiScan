@@ -185,7 +185,7 @@ class BatchProcessing(ABC):
         if self.writer.besoinSauvegarder():
             self.writer._sauvegarder_batch()
         duree = time.time() - start
-        logger.info(f"[⏱️ Perf] {total} lignes traitées en {duree:.2f} secondes")
+        logging.info(f"[⏱️ Perf] {total} lignes traitées en {duree:.2f} secondes")
 
 
 
@@ -316,11 +316,12 @@ class BaseWriter(ABC):
         pass
 
 class BatchWriterJSON(BaseWriter):
-    def __init__(self, dossier_sortie, fichierSortie, runId, taille_batch=None):
+    def __init__(self, dossier_sortie, fichierSortie, runId, etape, taille_batch=None):
         self.dossier_sortie = dossier_sortie
         self.fichierSortie = fichierSortie
         self.nom_entree = os.path.splitext(os.path.basename(fichierSortie))[0]
         self.runId = runId
+        self.etape = etape
         self.taille_batch = taille_batch
         self.batch_unique = self.taille_batch is None
         self.lignes = []
@@ -348,7 +349,7 @@ class BatchWriterJSON(BaseWriter):
             for ligne in self.lignes:
                 f.write(json.dumps(ligne.to_dict(), ensure_ascii=False) + "\n")
 
-        print(f"[💾] Batch {self.compteur_fichier} sauvegardé avec {len(self.lignes)} lignes")
+        print(f"[Etape {self.etape} 💾] Batch {self.compteur_fichier} sauvegardé avec {len(self.lignes)} lignes")
         self.lignes = []
 
         if not self.batch_unique:
@@ -359,7 +360,7 @@ class BatchWriterJSON(BaseWriter):
         stopPath = os.path.join(self.dossier_sortie, f"{self.runId}_STOP")
         with open(stopPath, "w", encoding="utf-8") as f:
             f.write("Fin de génération du batch.")
-        print(f"[✔️] Fichier STOP créé : {stopPath}")
+        print(f"[Etape {self.etape}✔️] Fichier STOP créé : {stopPath}")
 
 
 
@@ -457,6 +458,7 @@ from logging.handlers import RotatingFileHandler
 
 logger = logging.getLogger("wiki")
 logger.setLevel(logging.INFO)
+logger.propagate = False
 
 handler = RotatingFileHandler("logs/wiki_api.log", maxBytes=10_000_000, backupCount=4, encoding="utf-8")
 formatter = logging.Formatter("[%(asctime)s] %(levelname)s - %(message)s")

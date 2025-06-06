@@ -14,7 +14,7 @@ class BatchProcessingInsertionBD(BatchProcessing):
 
     def chargerEntrees(self) -> List[EntreeHistorique]:
         lignes = self.reader.loadLignes()
-        print(f"✅ {len(lignes)} lignes chargées depuis {self.reader.fichierSource}")
+        print(f"[Etape 5 ✅ ] {len(lignes)} lignes chargées depuis {self.reader.fichierSource}")
 
         # On charge aussi la table P31Classification
         cursor = self.writer.conn.cursor()
@@ -28,7 +28,7 @@ class BatchProcessingInsertionBD(BatchProcessing):
                 p31DansBatch.update(entree.p31)
         nouveauxP31 = p31DansBatch - self.p31Connus
         # Affichage du nombre de nouveaux P31 à insérer
-        print(f"[📊] {len(nouveauxP31)} nouveaux P31 à insérer dans P31Classification.")
+        print(f"[Etape 5 📊 ] {len(nouveauxP31)} nouveaux P31 à insérer dans P31Classification.")
 
         return lignes
 
@@ -70,11 +70,11 @@ class BatchProcessingInsertionBD(BatchProcessing):
                 "(0,0,0)",         # Couleur par défaut
                 1                  # Visible = True
             ))
-            print(f"[➕] SourceBacklink ajoutée : {ligne.source_backlink}")
+            print(f"[Etape 5 ➕ ] SourceBacklink ajoutée : {ligne.source_backlink}")
 
 
         if not ligne.p31 or not ligne.p31.startswith("Q"):
-            logger.warning(f"[⚠️] P31 invalide ou manquant pour {ligne.qid} → {ligne.p31}")
+            logger.warning(f"[Etape 5 ⚠️] P31 invalide ou manquant pour {ligne.qid} → {ligne.p31}")
             return ligne  # on ignore l'entrée sans planter
 
         if ligne.p31 not in self.p31Connus:

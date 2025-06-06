@@ -13,6 +13,7 @@ class BatchProcessingCoordonnees(BatchProcessing):
         self.writer = BatchWriterJSON(
             dossier_sortie = dossierSortie,
             runId = runId,
+            etape=3,
             fichierSortie=fichierInput.replace("Step2", "Step3")
         )
         self.pause = pause
@@ -20,7 +21,7 @@ class BatchProcessingCoordonnees(BatchProcessing):
 
     def chargerEntrees(self) -> List[EntreeHistorique]:
         lignes = self.reader.loadLignes()
-        print(f"✅ {len(lignes)} lignes chargées depuis {self.reader.fichierSource}")
+        print(f"[Etape 3 ✅] {len(lignes)} lignes chargées depuis {self.reader.fichierSource}")
         return lignes
 
 
