@@ -1,11 +1,14 @@
 import subprocess
+import os
+
+run_id = os.getenv("RUN_ID")
 
 commands = [
-    ["python", "src/main.py", "--runId", "JD01", "--step", "1"],
-    ["python", "src/main.py", "--runId", "JD01", "--step", "2"],
-    ["python", "src/main.py", "--runId", "JD01", "--step", "3"],
-    ["python", "src/main.py", "--runId", "JD01", "--step", "4"],
-    ["python", "src/main.py", "--runId", "JD01", "--step", "5"],
+    ["python", "src/main.py", "--runId", run_id, "--step", "1"],
+    ["python", "src/main.py", "--runId", run_id, "--step", "2"],
+    ["python", "src/main.py", "--runId", run_id, "--step", "3"],
+    ["python", "src/main.py", "--runId", run_id, "--step", "4"],
+    ["python", "src/main.py", "--runId", run_id, "--step", "5"],
 ]
 
 processes = []

@@ -7,7 +7,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/src/main.py",
       "cwd": "${workspaceFolder}",
-      "args": ["--runId", "JD01", "--step", "0"],
+      "args": ["--runId", "DURANDAL", "--step", "0"],
       "console": "integratedTerminal",
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
@@ -19,7 +19,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/src/main.py",
       "cwd": "${workspaceFolder}",
-      "args": ["--runId", "JD01", "--step", "1"],
+      "args": ["--runId", "DURANDAL", "--step", "1"],
       "console": "integratedTerminal",
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
@@ -31,7 +31,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/src/main.py",
       "cwd": "${workspaceFolder}",
-      "args": ["--runId", "JD01", "--step", "2"],
+      "args": ["--runId", "DURANDAL", "--step", "2"],
       "console": "integratedTerminal",
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
@@ -43,7 +43,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/src/main.py",
       "cwd": "${workspaceFolder}",
-      "args": ["--runId", "JD01", "--step", "3"],
+      "args": ["--runId", "DURANDAL", "--step", "3"],
       "console": "integratedTerminal",
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
@@ -55,7 +55,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/src/main.py",
       "cwd": "${workspaceFolder}",
-      "args": ["--runId", "JD01", "--step", "4"],
+      "args": ["--runId", "DURANDAL", "--step", "4"],
       "console": "integratedTerminal",
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
@@ -67,7 +67,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/src/main.py",
       "cwd": "${workspaceFolder}",
-      "args": ["--runId", "JD01", "--step", "5"],
+      "args": ["--runId", "DURANDAL", "--step", "5"],
       "console": "integratedTerminal",
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
@@ -81,7 +81,8 @@
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "env": {
-        "PYTHONPATH": "${workspaceFolder}"
+        "PYTHONPATH": "${workspaceFolder}",
+        "RUN_ID": "DURANDAL"
       }
     }
   ]

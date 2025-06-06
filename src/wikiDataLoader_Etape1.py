@@ -373,6 +373,7 @@ class BatchProcessingTitresExtraction(BatchProcessing):
         Méthode par défaut : retourne la ligne sans modification.
         Peut être redéfinie dans les classes filles pour traitement spécifique.
         """
+        
         if ligne.crossReference>0:
             self.pagesTraitée += 1
             lienDansTexte = self.contientLienDansHTML(ligne.titre, self.bltitle)
@@ -385,7 +386,7 @@ class BatchProcessingTitresExtraction(BatchProcessing):
 
             if not lienDansTexte:
                 return None
-
+        
         return ligne
 
 
